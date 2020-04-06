@@ -55,9 +55,15 @@ pipeline {
     }
 
   }
+post {
+		always {
+            echo 'Finishing up'
+            deleteDir() /* clean up our workspace */
+        }
 failure {
         	 mail to: 'yaserni@ac.sce.ac.il',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL} "
-    }
+} 
+   }
 }
