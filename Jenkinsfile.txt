@@ -68,18 +68,22 @@ pipeline {
 
     failure {
 
-
       // Notify developer team of the failure
 
-
       mail to: 'yaserni@ac.sce.ac.il', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-
-
     }
-
-
-
   }
+
+  post {
+
+        success {
+
+          // Notify if the upload succeeded
+
+          mail to: 'yaserni@ac.sce.ac.il', subject: 'New build available!', body: 'Check it out! Enter the link :  ${env.BUILD_URL}'
+
+        }
+      }
 
  
 }
