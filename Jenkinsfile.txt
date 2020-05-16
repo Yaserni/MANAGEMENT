@@ -42,9 +42,9 @@ pipeline {
 
       steps {
         
-        sh './gradlew testDebugUnitTest '
+        sh './gradlew testDebugUnitTest testDebugUnitTest'
   
-        junit '**/TEST-*.xml'
+ //       junit '**/TEST-*.xml'
 	//emailext attachmentsPattern: '**/Test-.xml', body: 'Find attachments', subject: 'test', to: 'yaserni@ac.sce.ac.il'
 
 
