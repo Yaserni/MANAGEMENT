@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "95657850764",
+    "firebase_url": "https://b7sport-50daf.firebaseio.com",
+    "project_id": "b7sport-50daf",
+    "storage_bucket": "b7sport-50daf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95657850764:android:2649e0ade20779898bc8a9",
+        "android_client_info": {
+          "package_name": "com.example.b7sport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95657850764-r0nvs0ke661j2fi1dkce7t4ph30ol3o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.b7sport",
+            "certificate_hash": "44ac1bf6a0a8bb7c2ea1c4db9b529b61f7fbc67d"
+          }
+        },
+        {
+          "client_id": "95657850764-shg6hg4f2661969col0smt9b8lfcpjhk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.b7sport",
+            "certificate_hash": "68c803122c51c434e5c66061b2595a5475a3f48a"
+          }
+        },
+        {
+          "client_id": "95657850764-pe1j9dvhr3sujroiun67qvenip3rbtog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrvILEPjxnJlohd9VW6NagRWsAQYQGSrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95657850764-pe1j9dvhr3sujroiun67qvenip3rbtog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

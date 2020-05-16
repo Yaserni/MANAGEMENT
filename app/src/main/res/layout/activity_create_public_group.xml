@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreatePublicGroupActivity">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:lineSpacingExtra="2dp"
+        android:text="יצירת קבוצה ציבורית"
+        android:textAlignment="center"
+        android:textColor="#EE9C27B0"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:typeface="normal" />
+
+    <ScrollView
+        android:id="@+id/sc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textView4">
+
+        <LinearLayout
+            android:id="@+id/la"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/sc"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="2dp"
+                android:text="פרטי מתקן ספורט"
+                android:textSize="22sp"
+                android:textStyle="bold|italic"
+                android:typeface="normal" />
+
+
+            <TextView
+                android:id="@+id/gr_name1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_type1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="type"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_street1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/la"
+                android:text="Street"
+
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_gr_neighbor1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Neighbor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_sporttype1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sporttype"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_lighting1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="lighting"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gr_activity1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/gr_id1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="id"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/publicgname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="שם קבוצה"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-1dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="שם"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/publicgname2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:text="מספר שחקנים"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/players_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="1dp"
+                android:ems="10"
+                android:hint="מספר שחקנים:"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="סוג קבוצה"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="24sp" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radiopublic"
+                android:checked="true"
+                android:textSize="24sp"
+                android:layout_marginBottom="10dp"
+                android:text="ציבורית"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioprivate"
+                android:textSize="24sp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:text="פרטית"/>
+
+        </RadioGroup>
+
+            <TextView
+                android:id="@+id/secrettext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="קוד קבוצה"
+                android:textSize="24sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/secretcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="0dp"
+                android:ems="10"
+                android:hint="מספר סודי"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:text="ייצר"
+                android:textColor="@color/material_on_primary_emphasis_medium"
+                android:textSize="24sp"
+                android:id="@+id/createg1"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

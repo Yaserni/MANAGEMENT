@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GroupProfile"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sg_grname3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#1418EA"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sg_playersnumber3"
+        android:textColor="#1418EA"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sg_isprivate3"
+        android:textColor="#1418EA"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/gr_name3"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="18sp"
+        />
+
+
+    <TextView
+        android:id="@+id/gr_type3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="type"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/gr_sporttype3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sporttype"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/gr_lighting3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="lighting"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/gr_gr_neighbor3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Neighbor"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/gr_street3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Street"
+        android:textSize="18sp"/>
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gr_activity3"
+        android:text="Activity"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gr_id3"
+        android:text="id"
+        android:textSize="18sp"/>
+
+    </LinearLayout>

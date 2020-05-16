@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">95657850764-pe1j9dvhr3sujroiun67qvenip3rbtog.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://b7sport-50daf.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">95657850764</string>
+    <string name="google_api_key" translatable="false">AIzaSyBrvILEPjxnJlohd9VW6NagRWsAQYQGSrA</string>
+    <string name="google_app_id" translatable="false">1:95657850764:android:2649e0ade20779898bc8a9</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBrvILEPjxnJlohd9VW6NagRWsAQYQGSrA</string>
+    <string name="google_storage_bucket" translatable="false">b7sport-50daf.appspot.com</string>
+    <string name="project_id" translatable="false">b7sport-50daf</string>
+</resources>
