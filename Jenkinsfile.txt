@@ -63,7 +63,22 @@ pipeline {
     }
 
   }
+  post {
 
+
+    failure {
+
+
+      // Notify developer team of the failure
+
+
+      mail to: 'yaserni@ac.sce.ac.il', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+
+
+    }
+
+
+  }
 
  
 }
