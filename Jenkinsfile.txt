@@ -44,7 +44,7 @@ pipeline {
             steps {
 
                 sh './gradlew testDebugUnitTest' 
-//                junit '*/TEST-*.xml'
+                junit '*/TEST-*.xml'
                 }
             }
 
