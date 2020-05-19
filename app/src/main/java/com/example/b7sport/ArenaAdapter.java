@@ -25,7 +25,7 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
     public AppCompatActivity z= new AppCompatActivity();
     private Context context;
     private List<Arena> list;
-    private List<Arena> fulllist;
+    private List<Arena> arenaListFull;
 
     private Arena arena;
     static int id;
@@ -35,7 +35,7 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
         this.context = context;
         this.list = list;
 //        fulllist=new ArrayList<Arena>(list);
-        fulllist=new ArrayList<>(RecyclerViewArena.groundList);
+        arenaListFull=new ArrayList<>(list);
     }
 
     @Override
@@ -77,37 +77,30 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
         return arenaFilter;
     }
     private Filter arenaFilter=new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-//           final ArrayList<Arena> fulllist1=new ArrayList<>(RecyclerViewArena.groundList);
-            List<Arena> filteredList = new ArrayList<>();
-            if (constraint==null || constraint.length()==0) {
-                filteredList.addAll(fulllist);
-            }
-            else {
-                String filterpattern = constraint.toString().toLowerCase().trim();
-
-                for (Arena item : fulllist)
-                {
-                    if (item.getName().toLowerCase().contains(filterpattern))
-                        filteredList.add(item);
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<Arena> filteredList = new ArrayList<>();
+                if (constraint == null || constraint.length() == 0) {
+                    filteredList.addAll(arenaListFull);
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (Arena item : arenaListFull) {
+                        if (item.getName().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    }
                 }
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
             }
-
-            FilterResults results = new FilterResults();
-            results.values=filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            list.clear();
-            list.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
-
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list.clear();
+                list.addAll((List) results.values);
+                notifyDataSetChanged();
+            }
+        };
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textid, textName, textType, textStreet,textNeighborh,textActivity,textLighting,textSportType;//I dont know if I must add the lat and lon

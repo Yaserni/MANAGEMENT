@@ -16,17 +16,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GroupProfile"></activity>
-        <activity android:name=".RecyclerViewGroup" />
-        <activity android:name=".Card" />
-        <activity android:name=".showReport" />
-        <activity android:name=".Profile" /> <!-- android:theme="@style/AppTheme.AppCompat.NoActionBar"> -->
-        <activity android:name=".Login">
+        <activity android:name=".Main2Activity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".GroupProfile" />
+        <activity android:name=".RecyclerViewGroup" />
+        <activity android:name=".Card" />
+        <activity android:name=".showReport" />
+        <activity android:name=".Profile" /> <!-- android:theme="@style/AppTheme.AppCompat.NoActionBar"> -->
+        <activity android:name=".Login">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
@@ -42,9 +51,10 @@
         </activity>
         <activity android:name=".blockuser" />
         <activity android:name=".CreatePublicGroupActivity" />
-        <activity android:name=".RecyclerViewArena" >
+        <activity android:name=".RecyclerViewArena">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

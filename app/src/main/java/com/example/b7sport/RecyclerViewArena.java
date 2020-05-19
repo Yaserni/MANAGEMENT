@@ -1,7 +1,6 @@
 package com.example.b7sport;
 
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,9 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -36,7 +33,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarEntry;
 
 public class RecyclerViewArena extends AppCompatActivity {
     private RecyclerView mList;
@@ -44,7 +40,7 @@ public class RecyclerViewArena extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     static List<Arena> groundList;
-//    private RecyclerView.Adapter adapter;
+    //    private RecyclerView.Adapter adapter;
     private ArenaAdapter adapter;
     final FirebaseDatabase data = FirebaseDatabase.getInstance();
     //    private ArenaAdapter adapter;
@@ -58,6 +54,8 @@ public class RecyclerViewArena extends AppCompatActivity {
         mList = findViewById(R.id.main_list);
 
         groundList = new ArrayList<>();
+        getDataFromFireBase();
+
 //        adapter = new ArenaAdapter(getApplicationContext(),groundList);
         adapter = new ArenaAdapter(this, groundList);
 
@@ -69,7 +67,7 @@ public class RecyclerViewArena extends AppCompatActivity {
         mList.setLayoutManager(linearLayoutManager);
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
-        getDataFromFireBase();
+//        getDataFromFireBase();
 
 
     }
@@ -118,6 +116,65 @@ public class RecyclerViewArena extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     } //
+
+
+//    private void getDataFromFireBase() {
+//
+//        final DatabaseReference ref = data.getReference("sport");
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                Arena arena;
+//                int id;
+//                String name;
+//                String type;
+//                String street;
+//                Double housenumber;
+//                String neighbor;
+//                String activity, sportType, lighting;
+//                double lat, lon;
+//                for (DataSnapshot d : dataSnapshot.getChildren()) {
+//                    arena = new Arena(Integer.parseInt(d.getKey()));
+//                    name = d.child("Name").getValue().toString();
+//                    neighbor = d.child("neighborho").getValue().toString();
+//                    type = d.child("Type").getValue().toString();
+//                    activity = d.child("Activity").getValue().toString();
+//                    street = d.child("street").getValue().toString();
+//                    lat = Double.parseDouble(d.child("lat").getValue().toString());
+//                    lon = Double.parseDouble(d.child("lon").getValue().toString());
+//                    lighting = d.child("lighting").getValue().toString();
+//
+//                    arena.setName(d.child("Name").getValue().toString());
+//                    sportType = d.child("SportType").getValue().toString();
+//                    housenumber = Double.parseDouble(d.child("HouseNumbe").getValue().toString());
+//
+//                    arena.setName(name);
+//                    arena.setType(type);
+//                    arena.setStreet(street);
+//                    arena.setNeighbor(neighbor);
+//                    arena.setHousenumber(housenumber);
+//                    arena.setLighing(activity);
+//                    arena.setSport_type(sportType);
+//                    arena.setLat(lat);
+//                    arena.setLon(lon);
+//                    arena.setActivity(activity);
+//                    groundList.add(arena);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//
+//        });
+//
+//    }
+
+
+
 
 
     private void getDataFromFireBase() {
@@ -183,13 +240,11 @@ public class RecyclerViewArena extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.arena_menu,menu);
+        inflater.inflate(R.menu.arena_menu, menu);
 
-        MenuItem SearchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =(SearchView) SearchItem.getActionView();
-
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        android.widget.SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -203,6 +258,7 @@ public class RecyclerViewArena extends AppCompatActivity {
             }
         });
         return true;
-    }
+        }
+
 
 }
