@@ -45,7 +45,7 @@ pipeline {
     dir("${BUILD_ROOT}") {
       sh "make test_report_clean test || true"
       junit keepLongStdio: true, testResults: '*_test_gcov.xml'
-    }
+    
   }
      //           sh './gradlew testDebugUnitTest' 
        //         junit '**/TEST-*.xml'
