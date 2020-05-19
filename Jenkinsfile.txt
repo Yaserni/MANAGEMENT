@@ -42,9 +42,12 @@ pipeline {
   stage('Unit test') {
 
             steps {
+      dir("${BUILD_ROOT}") {
+      sh "make test_report_clean test || true"
+      junit keepLongStdio: true, testResults: '**/TEST-*.xml'
 
-                sh './gradlew testDebugUnitTest' 
-                junit '**/TEST-*.xml'
+     //           sh './gradlew testDebugUnitTest' 
+       //         junit '**/TEST-*.xml'
                 }
             }
 
