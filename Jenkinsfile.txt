@@ -38,19 +38,17 @@ pipeline {
 
     }
 
-    stage('Unit test') {
+ 
+  stage('Unit test') {
 
-      steps {
-        
-        sh './gradlew testDebugUnitTest testDebugUnitTest'
-  
- //       junit '**/TEST-*.xml'
-	//emailext attachmentsPattern: '**/Test-.xml', body: 'Find attachments', subject: 'test', to: 'yaserni@ac.sce.ac.il'
+            steps {
 
+                sh './gradlew testDebugUnitTest' 
+//                junit '*/TEST-*.xml'
+                }
+            }
 
-      }
-
-    }
+   
 
     stage('Build APK') {
 
@@ -61,16 +59,10 @@ pipeline {
       }
 
     }
-     //   stage('Static analysis') {
-     // steps {
-        // Run Lint and analyse the results
-     //   sh './gradlew lintDebug'
-      //  androidLint pattern: '**/lint-results-*.xml'
-     // }
-   // }
 
   }
-  post {
+  
+   post {
 
 
     failure {
@@ -79,18 +71,13 @@ pipeline {
 
       mail to: 'yaserni@ac.sce.ac.il', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
-  }
-
-  post {
-
-        success {
+    success {
 
           // Notify if the upload succeeded
 
-          mail to: 'yaserni@ac.sce.ac.il', subject: 'New build available!', body: 'Check it out! Enter the link :  ${env.BUILD_URL}'
+          mail to: 'yaserni@ac.sce.ac.il', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} Check it out! Enter the link :  ${env.BUILD_URL}"
 
         }
-      }
+  }
 
- 
 }
