@@ -40,7 +40,7 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_singleitem, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_singleitem, parent, false);
         return new ViewHolder(v);
     }
 
@@ -101,6 +101,10 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
                 notifyDataSetChanged();
             }
         };
+    public void setfullValue(ArrayList<Arena> groundList)
+    {
+        arenaListFull=new ArrayList<>(groundList);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textid, textName, textType, textStreet,textNeighborh,textActivity,textLighting,textSportType;//I dont know if I must add the lat and lon

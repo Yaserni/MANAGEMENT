@@ -1,6 +1,8 @@
 package com.example.b7sport;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,7 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -33,10 +38,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarEntry;
 
 public class RecyclerViewArena extends AppCompatActivity {
     private RecyclerView mList;
-
+private TextView se;
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     static List<Arena> groundList;
@@ -54,10 +60,10 @@ public class RecyclerViewArena extends AppCompatActivity {
         mList = findViewById(R.id.main_list);
 
         groundList = new ArrayList<>();
-        getDataFromFireBase();
-
 //        adapter = new ArenaAdapter(getApplicationContext(),groundList);
         adapter = new ArenaAdapter(this, groundList);
+
+        se=findViewById(R.id.sel);
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -67,9 +73,15 @@ public class RecyclerViewArena extends AppCompatActivity {
         mList.setLayoutManager(linearLayoutManager);
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
-//        getDataFromFireBase();
+        getDataFromFireBase();
 
+se.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(getApplicationContext(), Main2Activity.class));
 
+    }
+});
     }
 
     private void getDataFromJSON() {
@@ -174,9 +186,6 @@ public class RecyclerViewArena extends AppCompatActivity {
 //    }
 
 
-
-
-
     private void getDataFromFireBase() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -211,8 +220,8 @@ public class RecyclerViewArena extends AppCompatActivity {
                     sportType = d.child("SportType").getValue().toString();
                     housenumber = Double.parseDouble(d.child("HouseNumbe").getValue().toString());
 
-                    arena.setName(name);
                     arena.setType(type);
+                    arena.setName(name);
                     arena.setStreet(street);
                     arena.setNeighbor(neighbor);
                     arena.setHousenumber(housenumber);
@@ -225,6 +234,7 @@ public class RecyclerViewArena extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
+                adapter.setfullValue((ArrayList<Arena>) groundList);
                 progressDialog.dismiss();
             }
 
@@ -258,7 +268,7 @@ public class RecyclerViewArena extends AppCompatActivity {
             }
         });
         return true;
-        }
+    }
 
 
 }

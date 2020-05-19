@@ -18,6 +18,8 @@ import java.util.List;
 public class Main2Activity extends AppCompatActivity {
     private ExampleAdapter adapter;
     private List<ExampleItem> exampleList;
+    RecyclerViewArena viewArena= new RecyclerViewArena();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private void fillExampleList() {
+
         exampleList = new ArrayList<>();
         exampleList.add(new ExampleItem( "One", "Ten"));
         exampleList.add(new ExampleItem( "Two", "Eleven"));
@@ -38,6 +41,11 @@ public class Main2Activity extends AppCompatActivity {
         exampleList.add(new ExampleItem( "Seven", "Sixteen"));
         exampleList.add(new ExampleItem( "Eight", "Seventeen"));
         exampleList.add(new ExampleItem( "Nine", "Eighteen"));
+        for(Arena arena : RecyclerViewArena.groundList)
+        {
+            exampleList.add(new ExampleItem(arena.getName(),arena.getActivity()));
+        }
+
     }
 
     private void setUpRecyclerView() {
@@ -48,6 +56,7 @@ public class Main2Activity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -72,4 +81,6 @@ public class Main2Activity extends AppCompatActivity {
         });
         return true;
     }
+
+
 }
