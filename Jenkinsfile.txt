@@ -1,82 +1,52 @@
 pipeline {
-
   agent {
-
     docker {
-
       image 'windsekirun/jenkins-android-docker:1.1.1'
-
     }
-
   }
-
   options {
-
-       skipStagesAfterUnstable()
-
+    // Stop the build early in case of compile or test failures
+    skipStagesAfterUnstable()
   }
-
   stages {
-
     stage ('Prepare'){
-
       steps {
-
         sh 'chmod +x ./gradlew'
-
       }
-
     }
-
     stage('Compile') {
-
       steps {
-
+        // Compile the app and its dependencies
         sh './gradlew compileDebugSources'
-
       }
-
     }
-
- 
-  stage('Unit test') {
-
-    steps{
-               sh './gradlew testDebugUnitTest' 
-               // junit '**/TEST-*.xml'
-                }
-            }
-
-   
-
-    stage('Build APK') {
-
+    stage('Unit/Integration tests') {
       steps {
-      
-        sh './gradlew assembleDebug'
-
+        // Compile and run the unit tests for the app and its dependencies
+        sh './gradlew testDebugUnitTest testDebugUnitTest'
+        sh 'find . -name "TEST-*.xml" -exec touch {} \\;'
+        // Analyse the test results and update the build result as appropriate
+        junit '**/TEST-*.xml'
       }
-
     }
-
-  }
-  
-   post {
-
-
-    failure {
-
-      // Notify developer team of the failure
-
-      mail to: 'yaserni@ac.sce.ac.il', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+    stage('Build APK') {
+      steps {
+        // Finish building and packaging the APK
+        sh './gradlew assembleDebug'
+      }
     }
-    success {
-
-          // Notify if the upload succeeded
-
-          mail to: 'yaserni@ac.sce.ac.il', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} Check it out! Enter the link :  ${env.BUILD_URL}"
-
-        }
   }
-
+post {
+        always {
+            echo 'Sending email.'
+            
+            emailext(
+                to: 'yaserni@ac.sce.ac.il',
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+            )
+            
+      }
+    }
 }
