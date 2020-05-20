@@ -35,6 +35,13 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
+    stage('lint') {
+      steps {
+       sh  './gradlew lint'
+      }
+    }
+
+
   }
 post {
         always {
