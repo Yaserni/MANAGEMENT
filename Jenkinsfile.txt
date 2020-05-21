@@ -37,7 +37,7 @@ pipeline {
     }
    // stage('lint') {
     //  steps {
-       sh  './gradlew lint'
+    //   sh  './gradlew lint'
     //  }
    // }
 
