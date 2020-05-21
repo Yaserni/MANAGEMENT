@@ -35,11 +35,11 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-    stage('lint') {
-      steps {
+   // stage('lint') {
+    //  steps {
        sh  './gradlew lint'
-      }
-    }
+    //  }
+   // }
 
 
   }
