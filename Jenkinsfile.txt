@@ -50,7 +50,7 @@ post {
                 unstableTotalAll: 120,
                 failedTotalAll: 220
             )
-            recordIssues(
+          //  recordIssues(
            //     tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle-report.xml'),
              //   unstableTotalAll: 160,
                // failedTotalAll: 320
