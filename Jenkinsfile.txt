@@ -33,7 +33,7 @@ pipeline {
     stage('Static Code Analysis') {
       steps {
         sh './gradlew :app:lint'
-        sh './gradlew checkstyleMain'
+   //     sh './gradlew checkstyleMain'
       }
     }
     stage('Build APK') {
