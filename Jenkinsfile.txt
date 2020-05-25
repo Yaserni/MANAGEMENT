@@ -4,6 +4,7 @@ pipeline {
       image 'windsekirun/jenkins-android-docker:1.1.1'
     }
   }
+
   options {
     // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
@@ -23,11 +24,16 @@ pipeline {
     stage('Unit/Integration tests') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
-        sh './gradlew testDebugUnitTest testDebugUnitTest'
-        sh './gradlew connectedDebugAndroidTest connectedDebugAndroidTest'
+        sh './gradlew testDebugUnitTest'
         sh 'find . -name "TEST-*.xml" -exec touch {} \\;'
         // Analyse the test results and update the build result as appropriate
         junit '**/TEST-*.xml'
+      }
+    }
+    stage('Static Code Analysis') {
+      steps {
+        sh './gradlew :app:lint'
+        sh './gradlew checkstyleMain'
       }
     }
     stage('Build APK') {
@@ -36,16 +42,20 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-   // stage('lint') {
-    //  steps {
-    //   sh  './gradlew lint'
-    //  }
-   // }
-
-
   }
 post {
         always {
+            recordIssues(
+                tool: androidLintParser(pattern: 'app/build/reports/lint-results.xml'),
+                unstableTotalAll: 120,
+                failedTotalAll: 220
+            )
+            recordIssues(
+                tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle-report.xml'),
+                unstableTotalAll: 160,
+                failedTotalAll: 320
+            )
+            
             echo 'Sending email.'
             
             emailext(
