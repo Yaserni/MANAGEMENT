@@ -17,7 +17,23 @@ public class Group {
     private double arenalat;
     private boolean isprivate;
     private String nodekey;
+    private String starthour,endhour;
 
+    public String getEndhour() {
+        return endhour;
+    }
+
+    public void setEndhour(String endhour) {
+        this.endhour = endhour;
+    }
+
+    public String getStarthour() {
+        return starthour;
+    }
+
+    public void setStarthour(String starthour) {
+        this.starthour = starthour;
+    }
 
     public String getSecretcode() {
         return secretcode;

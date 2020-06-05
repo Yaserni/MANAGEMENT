@@ -3,18 +3,26 @@ package com.example.b7sport;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+import android.app.TimePickerDialog;
+import android.app.DialogFragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,21 +30,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
-public class CreatePublicGroupActivity extends AppCompatActivity {
+public class CreatePublicGroupActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     DatabaseReference firebaseDatabase;
 
     public TextView textid, textName, textType, textStreet,textNeighborh,textActivity,textLighting,textSportType,secretcode;//I dont know if I must add the lat and lon
-    Button selctgrbtn;
+    Button selctgrbtn,starthour,endhour;
     TextView secretTextView;
     EditText group_p_number,group_name;
-
+    TextView textView ;
     RadioButton privateG;
     RadioButton publicG;
     Arena arena;
     int id;
+    final FirebaseDatabase data = FirebaseDatabase.getInstance();
 
+    ArrayList<helper> helpers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +72,30 @@ public class CreatePublicGroupActivity extends AppCompatActivity {
         secretcode=findViewById(R.id.secretcode);
         secretTextView= findViewById(R.id.secrettext);
 
+
+        starthour = findViewById(R.id.starthour);
+        endhour = findViewById(R.id.endhour);
+        Date d = new Date();
+        starthour.setText( "00:00");
+        endhour.setText( "00:00");
+        starthour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView=starthour;
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getFragmentManager(), "time picker");
+            }
+        });
+
+        endhour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView=endhour;
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getFragmentManager(), "time picker");
+            }
+        });
+    getDataFromFireBaseidstarth();
         //put the values ...
         privateG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -105,10 +142,19 @@ public class CreatePublicGroupActivity extends AppCompatActivity {
                     if(isPrivate)
                         g.setSecretcode(secretcode.getText().toString());
                     else g.setSecretcode("");
+                    g.setStarthour(starthour.getText().toString());
+                    g.setEndhour(endhour.getText().toString());
+                    if(!checkhour(g.getStarthour(),g.getEndhour()))
+                    {
+                        selctgrbtn.setError("או שהמגרש שמור בשעות אלה או שיש שגיאה בנתונים שהכנסת!!");
+                        return;
+                    }
+
+
 
                     firebaseDatabase.push().setValue(g);
                     Toast.makeText(CreatePublicGroupActivity.this, "Data inserted successfully", Toast.LENGTH_LONG).show();
-                    Intent intent =new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent =new Intent(getApplicationContext(),RecyclerViewGroup.class);
                     startActivity(intent);
                 }
 //                else startActivity();
@@ -116,6 +162,93 @@ public class CreatePublicGroupActivity extends AppCompatActivity {
         });
 
     }
+    private void getDataFromFireBaseidstarth() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+
+        final DatabaseReference ref = data.getReference("Groups");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int arenaid;
+                String starth, endh;
+                helpers = new ArrayList<>();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    if(d.getKey().equals("id")) break;
+
+                    arenaid = Integer.parseInt(d.child("arenaid").getValue().toString());
+                    starth = d.child("starthour").getValue().toString();
+                    endh = d.child("endhour").getValue().toString();
+                    if(arenaid==arena.getId())
+                    {
+                        helpers.add(new helper(starth,endh,arenaid));
+                    }
+                }
+
+                int []a=new int[2];
+        //        parsehour("12:30",a);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
+public boolean checkhour(String starth,String endh)
+{
+    int []sth=new int[2];//start hour
+    int []enh=new int[2];//end hour
+    parsehour(starth,sth);
+    parsehour(endh,enh);
+//    if(sth[0]>enh[0] ||(sth[0]==enh[0] && sth[1]>=enh[1]))
+    int otherstartm,startm=calcminutes(sth);
+    int otherendm,endm =calcminutes(enh);
+    if(startm >= endm)
+    {
+        Toast.makeText(CreatePublicGroupActivity.this, "שעת התחלה חייבת להיות לפני שעת סיום", Toast.LENGTH_LONG).show();
+        return false;
+    }
+    int []sth1=new int[2];//start hour
+    int []enh1=new int[2];//end hour
+
+//if(helpers!=null)
+    helper h ;
+    for (int i=0; i< helpers.size();i++)
+    {
+        h=helpers.get(i);
+        parsehour(h.starthour,sth1);
+        parsehour(h.endhour,enh1);
+
+        otherstartm = calcminutes(sth1);
+        otherendm = calcminutes(enh1);
+        if(((startm>otherstartm && startm< otherendm ) || (endm>otherstartm && endm < otherendm)))
+        {
+            //error try another time this arena already reserved
+            Toast.makeText(CreatePublicGroupActivity.this, "בזמן זה שבחרת קיימת קבוצה אחרת תנשה זמן אחר", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+    return true;
+}
+
+
+public int calcminutes(int[] a)
+{
+    return a[0]*60+a[1];
+}
+public int[] parsehour(String sh,int hour[])
+{
+
+    String []s =sh.split(":");
+    hour[0]=Integer.parseInt(s[0]);
+    hour[1]=Integer.parseInt(s[1]);
+
+    return hour;
+}
+
     public boolean CheckGrName(String name)
     {
         if(name.equals("") || name == null)
@@ -162,9 +295,6 @@ public class CreatePublicGroupActivity extends AppCompatActivity {
 
                     id = Integer.parseInt(dataSnapshot.getValue().toString());
 
-
-
-
             }
 
             @Override
@@ -177,6 +307,29 @@ public class CreatePublicGroupActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        String h="";
+        String m="";
+        if(hourOfDay<10)
+            h="0";
+        h+=Integer.toString( hourOfDay);
+        if(minute<10)
+            m="0";
+        m+=Integer.toString( minute);
+        textView.setText(h + ":" + m);
+    }
 }
 
 
+    class helper
+    {
+       public String starthour, endhour;
+       public int arenaid;
+
+        public helper(String starthour, String endhour, int arenaid) {
+            this.starthour = starthour;
+            this.endhour = endhour;
+            this.arenaid = arenaid;
+        }
+    }

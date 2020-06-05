@@ -40,17 +40,11 @@
             android:label="@string/title_activity_arena_maps">
 
         </activity>
-        <activity android:name=".Main2Activity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".Main2Activity"/>
         <activity android:name=".GroupProfile" />
-        <activity android:name=".RecyclerViewGroup" />
+        <activity android:name=".RecyclerViewGroup" >
+
+        </activity>
         <activity android:name=".Card" />
         <activity android:name=".showReport" />
         <activity android:name=".Profile" /> <!-- android:theme="@style/AppTheme.AppCompat.NoActionBar"> -->
@@ -62,7 +56,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" >
+
+        </activity>
         <activity android:name=".adminpage">
 
             <!--
@@ -74,13 +70,15 @@
 
         </activity>
         <activity android:name=".blockuser" />
-        <activity android:name=".CreatePublicGroupActivity" />
-        <activity android:name=".RecyclerViewArena">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".CreatePublicGroupActivity" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity android:name=".RecyclerViewArena">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".ChangePassword" />
         <activity android:name=".Mesg" />

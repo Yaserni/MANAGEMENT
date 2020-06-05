@@ -144,33 +144,76 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="שעת התחלה"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/starthour"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:text="שעת התחלה"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="שעת סיום"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="שעת סיום"
+                android:id="@+id/endhour"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="סוג קבוצה"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="24sp" />
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <RadioButton
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radiopublic"
-                android:checked="true"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"
-                android:text="ציבורית"/>
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioprivate"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
-                android:text="פרטית"/>
+                android:layout_marginEnd="1dp">
 
-        </RadioGroup>
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radiopublic"
+                    android:checked="true"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="1dp"
+                    android:text="ציבורית"/>
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioprivate"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="פרטית"/>
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/secrettext"
