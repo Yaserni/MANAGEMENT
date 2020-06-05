@@ -10,19 +10,16 @@ checkstyle {
     ignoreFailures = true
 
 
-
 }
 
 
-
-task checkstyleMain(type:Checkstyle){
+task checkstyleMain(type: Checkstyle) {
 
     source = 'src/main/java'
 
     classpath = files()
 
 }
-
 
 
 tasks.withType(Checkstyle) {
@@ -32,7 +29,6 @@ tasks.withType(Checkstyle) {
         xml.enabled true
 
         xml.destination file("${project.buildDir.absolutePath}/reports/checkstyle/checkstyle-report.xml")
-
 
 
         html.enabled false
@@ -79,6 +75,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

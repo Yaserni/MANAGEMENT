@@ -4,5 +4,5 @@
         <ignore path="src/main/res/layout" />
         <ignore path="src/main/test" />
     </issue>
- 
+
 </lint>

@@ -2,12 +2,16 @@ package com.example.b7sport;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GroupProfile extends AppCompatActivity {
     public TextView textid, textName, textType, textStreet,textNeighborh,textActivity,textLighting,textSportType,groupname ,numberofplayers,isprivate;//I dont know if I must add the lat and lon
 
+    Button showpart,showmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +40,27 @@ public class GroupProfile extends AppCompatActivity {
         textSportType.setText("סוג ספורט : " +GroupAdapter.selected_group.getArenasport_type());
         groupname.setText("שם קבוצה: " + GroupAdapter.selected_group.getGroupname());
         numberofplayers.setText("מספר שחקנים בקבוצה: " + GroupAdapter.selected_group.getPlayersnumber());
+        showpart =findViewById(R.id.showParticipants);
+        showmap =findViewById(R.id.showmap);
 
         if(GroupAdapter.selected_group.isIsprivate())
             isprivate.setText("קבוצה פרטית");
         else
             isprivate.setText("קבוצה ציבורית");
 
+        showpart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+            }
+        });
+
+
+        showmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ArenaMapsActivity.class));
+            }
+        });
     }
 }

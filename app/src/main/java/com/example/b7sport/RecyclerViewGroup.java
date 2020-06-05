@@ -27,7 +27,7 @@ public class RecyclerViewGroup extends AppCompatActivity {
     static List<Group> groupList;
     private RecyclerView.Adapter adapter;
     final FirebaseDatabase data = FirebaseDatabase.getInstance();
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view_group);
@@ -90,7 +90,7 @@ public class RecyclerViewGroup extends AppCompatActivity {
                     sportType = d.child("arenasport_type").getValue().toString();
                     housenumber = Double.parseDouble(d.child("arenahousenumber").getValue().toString());
                     grname = d.child("groupname").getValue().toString();
-                    grid = Integer.parseInt(d.child("groupid").getValue().toString());
+                    //grid = Integer.parseInt(d.child("groupid").getValue().toString());
                     playernum = Integer.parseInt(d.child("playersnumber").getValue().toString());
                     isPrivate = Boolean.getBoolean(d.child("isprivate").getValue().toString());
                     //                arena.setId(id);

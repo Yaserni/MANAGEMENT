@@ -9,24 +9,26 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> implements Filterable {
-    private List<ExampleItem> exampleList;
-    private List<ExampleItem> exampleListFull;
+    private List<String> exampleList;
+    private List<String> exampleListFull;
+
     class ExampleViewHolder extends RecyclerView.ViewHolder {
         TextView textView1;
-        TextView textView2;
+        CardView emailcard;
         ExampleViewHolder(View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.text_view1);
-            textView2 = itemView.findViewById(R.id.text_view2);
+            emailcard= itemView.findViewById(R.id.emailcard);
         }
     }
-    public ExampleAdapter(List<ExampleItem> exampleList) {
+    public ExampleAdapter(List<String> exampleList) {
         this.exampleList = exampleList;
         exampleListFull = new ArrayList<>(exampleList);
     }
@@ -39,9 +41,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     }
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
-        ExampleItem currentItem = exampleList.get(position);
-        holder.textView1.setText(currentItem.getText1());
-        holder.textView2.setText(currentItem.getText2());
+        String currentItem = exampleList.get(position);
+        holder.textView1.setText(currentItem);
     }
     @Override
     public int getItemCount() {
@@ -54,13 +55,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<ExampleItem> filteredList = new ArrayList<>();
+            List<String> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(exampleListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (ExampleItem item : exampleListFull) {
-                    if (item.getText2().toLowerCase().contains(filterPattern)) {
+                for (String item : exampleListFull) {
+                    if (item.toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
