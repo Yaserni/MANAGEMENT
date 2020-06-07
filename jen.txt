@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build APK') {
       steps {
-        // Finish building and packaging the APK
+        // Finish building and packaging the APK .
         sh './gradlew assembleDebug'
       }
     }
