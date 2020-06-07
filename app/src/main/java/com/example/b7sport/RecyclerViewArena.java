@@ -42,7 +42,7 @@ import java.util.jar.JarEntry;
 
 public class RecyclerViewArena extends AppCompatActivity {
     private RecyclerView mList;
-private TextView se;
+    private TextView se;
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     static List<Arena> groundList;
@@ -63,7 +63,6 @@ private TextView se;
 //        adapter = new ArenaAdapter(getApplicationContext(),groundList);
         adapter = new ArenaAdapter(this, groundList);
 
-        se=findViewById(R.id.sel);
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -75,13 +74,7 @@ private TextView se;
         mList.setAdapter(adapter);
         getDataFromFireBase();
 
-se.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(getApplicationContext(), Main2Activity.class));
 
-    }
-});
     }
 
     private void getDataFromJSON() {
@@ -247,6 +240,7 @@ se.setOnClickListener(new View.OnClickListener() {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -270,5 +264,25 @@ se.setOnClickListener(new View.OnClickListener() {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.byname:
+                ArenaAdapter.flag=0;
+                return true;
+            case R.id.byarenatype:
+                ArenaAdapter.flag=1;
+                return true;
+            case R.id.bysporttype:
+                ArenaAdapter.flag=2;
+                return true;
+            default:
+                ArenaAdapter.flag=0;
+                return super.onOptionsItemSelected(item);
 
+
+        }
+    }
+//}
 }
+

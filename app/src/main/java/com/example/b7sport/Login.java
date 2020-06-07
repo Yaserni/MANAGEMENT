@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,6 +23,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -33,10 +40,20 @@ public class Login extends AppCompatActivity {
     Button mLoginButton;
     FirebaseAuth fAuth;
     ProgressDialog dialog;
+     FirebaseDatabase data;
+     public  static String  Email;
+
+    Logic l = new Logic();
+    final String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final int[] flag = {0};
         setContentView(R.layout.activity_login);
+         data = FirebaseDatabase.getInstance();
+         final DatabaseReference ref = data.getReference("EDMT_FIREBASE");
+
 
         dialog = new ProgressDialog(this);
 
@@ -48,23 +65,31 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
 
         Intent intent1 = new Intent(Login.this,MainActivity.class);
+        Intent intent2 = new Intent(Login.this,MainActivity.class);
+
         String emailas  = mEmail.getText().toString();
         intent1.putExtra("emailadd",emailas);
 
-      //  if(fAuth.getCurrentUser()!=null){
-       //     startActivity(intent1);
-       //     finish();
-       // }
+        if(fAuth.getCurrentUser()!=null){
+            intent2.putExtra("emailadd",fAuth.getCurrentUser().getEmail().toString());
+            startActivity(intent2);
+            finish();
+        }
 
         mLoginButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
 
-                String email = mEmail.getText().toString().trim();
+                final String email = mEmail.getText().toString().trim();
+                Email=email;
+
 
                 String password = mPassword.getText().toString().trim();
-                if (EmailisEmpty(email)) return;
-
-                if (PasswordIsEmpty(password)) return;
+                if (EmailisEmpty(email) && PasswordIsEmpty(password)) return;
+               /* if(l.EmailRegex(email)){
+                    mEmail.setError("The Format of the email must be example@example.com");
+                    return;
+                }*/
+                //if (PasswordIsEmpty(password)) return;
 
                 dialog.setMessage("Loging in...");
                 dialog.show();
@@ -75,6 +100,7 @@ public class Login extends AppCompatActivity {
                     mEmail.setError("Email is Required");
                     return;
                 }
+
                 if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required");
                     return;
@@ -83,6 +109,8 @@ public class Login extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(),adminpage.class);
                     Toast.makeText(Login.this,"Loged in Successfully.",Toast.LENGTH_SHORT).show();
                     startActivity(intent);
+                    finish();
+
                 }
                 else{
 
@@ -90,29 +118,49 @@ public class Login extends AppCompatActivity {
 //                    mPassword.setError("Password Must be longer than 6 chars!");
 //                    return;
 //                }
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            dialog.dismiss();
 
-                            Toast.makeText(Login.this,"Loged in Successfully.",Toast.LENGTH_SHORT).show();
-                            startActivity(myIntent);
-                            //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        }else{
-                            dialog.dismiss();
-                            Toast.makeText(Login.this,"Error ! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        }
+
+
+
+
+
+
+
+
+
+
+                    if(true)
+                    {
+                     fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                dialog.dismiss();
+
+                                Toast.makeText(Login.this,"Loged in Successfully.",Toast.LENGTH_SHORT).show();
+                                startActivity(myIntent);
+                                finish();
+
+                                //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            }else{
+                                dialog.dismiss();
+                                Toast.makeText(Login.this,"Error ! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            }
                     }
-                });
+                });}
+                    else
+                        Toast.makeText(Login.this,"this user is Bloced",Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
+
         mRegisterActivity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 startActivity(new Intent(getApplicationContext(),Register.class));
+                finish();
+
             }
         });
         mPasswordRecovery.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +207,21 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+
+
     public boolean EmailisEmpty(String email){
         if(TextUtils.isEmpty(email)){
             mEmail.setError("חובה למלות שדה זה");
+            return true;
+        }
+        return false;
+    }
+    public boolean EmailRegexCheck(String email){
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if(!matcher.matches()){
+            mEmail.setError("The Format of the email must be example@example.com");
             return true;
         }
         return false;
@@ -173,5 +233,8 @@ public class Login extends AppCompatActivity {
         }
         return false;
     }
+
+
+
 
 }

@@ -9,19 +9,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<ViewHolder>{
-    MainActivity listActivity;
+    AllUsers listActivity;
     List<InfoFromDataBase> infolist;
+    Context context;
 
-    public UsersAdapter(MainActivity listActivity,List<InfoFromDataBase> infolist){
+    public UsersAdapter(Context listActivity,List<InfoFromDataBase> infolist){
+        this.context = listActivity;
         this.infolist = infolist;
-        this.listActivity = listActivity;
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //View v = LayoutInflater.from(context).inflate(R.layout.activity_recycler, parent, false);
+        //return new ViewHolder(v);
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_recycler,parent,false);
         ViewHolder viewHolder = new ViewHolder(itemView);
 
@@ -33,6 +37,7 @@ public class UsersAdapter extends RecyclerView.Adapter<ViewHolder>{
         holder.fullname.setText(infolist.get(position).getFullName());
         holder.phonenumber.setText(infolist.get(position).getPhoneNumber());
         holder.email.setText(infolist.get(position).getEmail());
+        holder.address.setText(infolist.get(position).getAddress());
     }
 
     @Override

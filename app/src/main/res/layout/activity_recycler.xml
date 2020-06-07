@@ -40,6 +40,14 @@
             android:textColor="#000"
             android:text="Phone Number is Here"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Address111"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:text="Address Number is Here"
+            />
 
         
     </LinearLayout>

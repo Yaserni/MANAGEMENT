@@ -1,6 +1,7 @@
 package com.example.b7sport;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,50 +20,41 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity {
-    private ExampleAdapter adapter;
+public class ShowParticipants extends AppCompatActivity {
+    private EmailAdapter adapter;
     private List<String> exampleList;
     final FirebaseDatabase data = FirebaseDatabase.getInstance();
-
+    static ArrayList<user> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+          setContentView(R.layout.activity_show_participants);
         fillExampleList();
         setUpRecyclerView();
+        adapter.setfullValue((ArrayList<String>) exampleList);
+        users= new ArrayList<>();
+        getuserfromEmail();
+
     }
 
     private void fillExampleList() {
 
         exampleList = new ArrayList<>();
         getDataFromFireBase();
-//        exampleList.add(new ExampleItem( "One", "Ten"));
-//        exampleList.add(new ExampleItem( "Two", "Eleven"));
-//        exampleList.add(new ExampleItem( "Three", "Twelve"));
-//        exampleList.add(new ExampleItem( "Four", "Thirteen"));
-//        exampleList.add(new ExampleItem( "Five", "Fourteen"));
-//        exampleList.add(new ExampleItem( "Six", "Fifteen"));
-//        exampleList.add(new ExampleItem( "Seven", "Sixteen"));
-//        exampleList.add(new ExampleItem( "Eight", "Seventeen"));
-//        exampleList.add(new ExampleItem( "Nine", "Eighteen"));
-//        for(Arena arena : RecyclerViewArena.groundList)
-//        {
-//            exampleList.add(new ExampleItem(arena.getName(),arena.getActivity()));
-//        }
-
     }
 
     private void setUpRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        adapter = new ExampleAdapter(exampleList);
+        adapter = new EmailAdapter(this,exampleList);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -98,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        final DatabaseReference ref = data.getReference("Groups/"+GroupAdapter.selected_group.getNodekey()+"Participants");
+        final DatabaseReference ref = data.getReference("Groups/"+GroupAdapter.selected_group.getNodeKey()+"/Participants");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -122,30 +114,60 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    public void getuserfromEmail(String email)
+
+//static user u;
+
+    public void getuserfromEmail()
     {
+
         final DatabaseReference ref = data.getReference("EDMT_FIREBASE");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String email;
+                user u = new user("1");
+                String email1;
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    if(d.getKey().equals("id")) break;
-                    email=d.child("UserEmail").getValue().toString();
-                    exampleList.add(email);
+//                    if (d.getKey().equals("id")) break;
+//                    email1 = d.child("email").getValue().toString();
+//                    if (email1.equals(email)) {
+                     u = new user("1");
+                    u.userEmail = d.child("email").getValue().toString();
+                    u.FullName = d.child("FullName").getValue().toString();
+                    u.userAddress = d.child("address").getValue().toString();
+                    u.PhoneNumber = d.child("PhoneNumber").getValue().toString();
+                    users.add(u);
+//                        exampleList.add(email);}
+//                        users.add(u);
+
+
                 }
-
-                adapter.notifyDataSetChanged();
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
 
+
         });
+
+    }
+
+}
+
+class user
+{
+    public String FullName,PhoneNumber,userAddress,userEmail;
+
+    public user(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public user(String fullName, String phoneNumber, String userAddress, String userEmail) {
+        FullName = fullName;
+        PhoneNumber = phoneNumber;
+        this.userAddress = userAddress;
+        this.userEmail = userEmail;
     }
 
 }

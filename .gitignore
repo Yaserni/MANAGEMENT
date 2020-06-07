@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
+app/src/test/java/com/example/b7sport/CreatePublicGroupActivityTest.java

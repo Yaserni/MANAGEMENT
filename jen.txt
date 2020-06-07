@@ -1,68 +1,55 @@
 pipeline {
-
   agent {
-    // Run on a build agent where we have the Android SDK installed
-     image 'windsekirun/jenkins-android-docker:1.1.1'
+    docker {
+      image 'windsekirun/jenkins-android-docker:1.1.1'
+    }
   }
-
   options {
     // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
   }
-
   stages {
-
+    stage ('Prepare'){
+      steps {
+        sh 'chmod +x ./gradlew'
+      }
+    }
     stage('Compile') {
-
       steps {
         // Compile the app and its dependencies
         sh './gradlew compileDebugSources'
-
       }
-
     }
-    stage('Unit test') {
-
+    stage('Unit/Integration tests') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
         sh './gradlew testDebugUnitTest testDebugUnitTest'
-
+        sh 'find . -name "TEST-*.xml" -exec touch {} \\;'
         // Analyse the test results and update the build result as appropriate
         junit '**/TEST-*.xml'
-
       }
-
     }
     stage('Build APK') {
       steps {
         // Finish building and packaging the APK
         sh './gradlew assembleDebug'
+      }
+    }
 
-        // Archive the APKs so that they can be downloaded from Jenkins
-        archiveArtifacts '**/*.apk'
+
+}
+
+post {
+        always {
+            echo 'Sending email.'
+            
+            emailext(
+                to: 'yaserni@ac.sce.ac.il,abdalsk@ac.sce.ac.il,odaiwa@ac.sce.ac.il',
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+            )
+            
       }
     }
-    stage('Static analysis') {
-      steps {
-        // Run Lint and analyse the results
-        sh './gradlew lintDebug'
-        androidLint pattern: '**/lint-results-*.xml'
-      }
-    }
-    stage('Deploy') {
-      
-      post {
-        success {
-          // Notify if the upload succeeded
-          mail to: 'yaserni@ac.sce.ac.il', subject: 'New build available!', body: 'Check it out!'
-        }
-      }
-    }
-  }
-  post {
-    failure {
-      // Notify developer team of the failure
-      mail to: 'yaserni@ac.sce.ac.il', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-    }
-  }
 }

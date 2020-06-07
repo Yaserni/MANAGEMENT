@@ -58,7 +58,7 @@ public class ArenaMapsActivity extends AppCompatActivity implements OnMapReadyCa
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.map_options,menu);
         return true;
-     }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

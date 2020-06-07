@@ -2,7 +2,22 @@ package com.example.b7sport;
 
 public class Info {
 
-    String Email,PhoneNumber,Name,Password,UserID,flag;
+    String Email;
+    String PhoneNumber;
+    String Name;
+    String Password;
+    String UserID;
+    String flag;
+    String Address;
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+//    String Email,PhoneNumber,Name,Password,UserID,flag;
 
     public String getEmail() {
         return Email;
@@ -56,6 +71,7 @@ public class Info {
 
     public Info() {
     }
+//    public Info(String Email,String PhoneNumber,String Name,String Password,String Address,String UserID,String flag) {
     public Info(String Email,String PhoneNumber,String Name,String Password,String UserID,String flag) {
         this.Email = Email;
         this.Name = Name;
@@ -63,6 +79,8 @@ public class Info {
         this.PhoneNumber = PhoneNumber;
         this.UserID = UserID;
         this.flag=flag;
+        this.Address = Address;
+
     }
 
      public boolean  t(){return  true;}

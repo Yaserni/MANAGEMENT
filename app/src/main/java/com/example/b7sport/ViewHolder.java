@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    TextView fullname,email,phonenumber;
+    TextView fullname,email,phonenumber,address;
     View mView;
 
     public ViewHolder(@NonNull View itemView){
@@ -26,6 +26,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         fullname = itemView.findViewById(R.id.Nameid);
         email = itemView.findViewById(R.id.Emailaddress);
         phonenumber = itemView.findViewById(R.id.PhoneNumber);
+        address = itemView.findViewById(R.id.Address111);
 
     }
 

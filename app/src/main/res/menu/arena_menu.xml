@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_search"
-        android:title="@string/search"
+        android:title="search"
         android:icon="@drawable/ic_search_black_24dp"
-        android:hint="@string/search_hint"
-    app:showAsAction="ifRoom|collapseActionView"
+        app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView"
         />
-</menu>
+    <item android:id="@+id/byname"
+        android:title="חיפוש לפי שם מגרש"
+        app:showAsAction="never"/>
+    <item android:id="@+id/byarenatype"
+        android:title="חיפוש לפי סוג מגרש"
+        app:showAsAction="never"/>
+    <item android:id="@+id/bysporttype"
+        android:title="חיפוש סוג ספרט"
+        app:showAsAction="never"/>
 
+
+
+</menu>

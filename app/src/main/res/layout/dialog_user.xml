@@ -7,13 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#232323"
+        android:background="@android:color/holo_blue_dark"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/dialog_name"
             android:text="User Name"
             android:textColor="@android:color/white"
             android:textStyle="bold"
@@ -24,7 +25,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:id="@+id/dialog_phone"
             android:text="Phone Number"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Address"
             android:textColor="@android:color/white"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"/>
@@ -37,12 +48,12 @@
             android:layout_marginTop="10dp"/>
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="Delete Friend"
-            android:layout_marginTop="10dp"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:text="Delete Friend"-->
+<!--            android:layout_marginTop="10dp"/>-->
 
 
     </LinearLayout>
@@ -50,7 +61,7 @@
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/ic_search_black_24dp"
+        android:src="@drawable/ic_person_black_24dp"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>

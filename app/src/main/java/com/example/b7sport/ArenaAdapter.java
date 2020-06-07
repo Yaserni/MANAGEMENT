@@ -26,6 +26,7 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
     private Context context;
     private List<Arena> list;
     private List<Arena> arenaListFull;
+    static int  flag=0;
 
     private Arena arena;
     static int id;
@@ -77,30 +78,42 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
         return arenaFilter;
     }
     private Filter arenaFilter=new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                List<Arena> filteredList = new ArrayList<>();
-                if (constraint == null || constraint.length() == 0) {
-                    filteredList.addAll(arenaListFull);
-                } else {
-                    String filterPattern = constraint.toString().toLowerCase().trim();
-                    for (Arena item : arenaListFull) {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Arena> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(arenaListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Arena item : arenaListFull) {
+                    if (flag==0) {
                         if (item.getName().toLowerCase().contains(filterPattern)) {
                             filteredList.add(item);
                         }
                     }
+                    if(flag==1) {
+                        if (item.getType().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    if (flag == 2) {
+                        if (item.getSport_type().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    }
+                    }
                 }
-                FilterResults results = new FilterResults();
-                results.values = filteredList;
-                return results;
             }
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                list.clear();
-                list.addAll((List) results.values);
-                notifyDataSetChanged();
-            }
-        };
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
     public void setfullValue(ArrayList<Arena> groundList)
     {
         arenaListFull=new ArrayList<>(groundList);
@@ -124,4 +137,6 @@ public class ArenaAdapter extends  RecyclerView.Adapter<ArenaAdapter.ViewHolder>
             textid=itemView.findViewById(R.id.gr_id);
         }
     }
+
 }
+

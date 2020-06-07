@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFF"
+    tools:context=".OtherUserProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/david_libre"
+            android:padding="16dp"
+            android:text= "פרופיל"
+            android:textSize="26sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/abc_vector_test"
+
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="50dp">
+
+                <ImageView
+                    android:id="@+id/ProfileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+                <!--                    android:background="@drawable/circular_bordershape"-->
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="vertical">
+                    <TextView
+
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/FullName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מייל :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/PhoneNumber1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מספר טלפון :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/Email1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מייל :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/Address1"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מספר טלפון :"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="שם :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_marginRight="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מספר טלפון :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_marginRight="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text="מייל :"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/david_libre"
+                        android:text=" כתובת :"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/update_address"
+                android:layout_width="146dp"
+                android:layout_height="48dp"
+                android:background="@drawable/abc_vector_test"
+                android:fontFamily="@font/david_libre"
+                android:text="עדכון כתובת"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/ProfilePictureBTN"
+                android:layout_marginTop="20dp"
+                android:layout_width="146dp"
+                android:layout_height="48dp"
+                android:background="@drawable/abc_vector_test"
+                android:fontFamily="@font/david_libre"
+                android:shadowColor="#5BA8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="0"
+                android:text=" תמונת פרופיל"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        app:itemBackground="@color/colorPrimary"-->
+<!--        app:itemIconTint="@drawable/selector"-->
+<!--        app:itemTextColor="@color/ic_launcher_background"-->
+<!--        app:menu="@menu/menu_navigation" />-->
+
+
+</RelativeLayout>

@@ -89,6 +89,19 @@
         android:id="@+id/gr_id3"
         android:text="id"
         android:textSize="18sp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/JoinpGroup"
+        android:text="הצתרף"
+        android:fontFamily="@font/david_libre"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CancelJoin"
+        android:text="בטול"
+        android:fontFamily="@font/david_libre"
+        />
 
 
     <Button
@@ -101,4 +114,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/showmap"
         android:text="הצג במפה"/>
-    </LinearLayout>
+
+</LinearLayout>

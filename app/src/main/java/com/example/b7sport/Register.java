@@ -1,10 +1,7 @@
 package com.example.b7sport;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,11 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
-    EditText mFullName,mEmail,mPassword,mPhonenumber;
+    EditText mFullName,mEmail,mPassword,mPhonenumber,mAddress;
     Button mRegisterbtn;
     TextView alreadyRegistered;
     FirebaseAuth fAuth;
@@ -52,9 +47,10 @@ public class Register extends AppCompatActivity {
         mFullName = findViewById(R.id.fName);
         mEmail = findViewById(R.id.eMail);
         mPassword = findViewById(R.id.passWord);
-        mPhonenumber = findViewById(R.id.phoneNumber);
+        mPhonenumber = findViewById(R.id.phoneNumber2);
         mRegisterbtn = findViewById(R.id.Registerbtn);
         alreadyRegistered = findViewById(R.id.alreadyRegistred);
+        mAddress = findViewById(R.id.address);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("EDMT_FIREBASE");
@@ -77,26 +73,47 @@ public class Register extends AppCompatActivity {
                 final String password = mPassword.getText().toString().trim();
                 final String Name = mFullName.getText().toString().trim();
                 final String PhoneNumber = mPhonenumber.getText().toString().trim();
+                final String Address = mAddress.getText().toString().trim();
+
                 myIntent.putExtra("email",email);
                 if(l.EmailRequired(email)) return;
                 if(l.PasswordIsEmpty(password)) return;
                 if(l.PasswordLength(password)) return;
+                if(l.EmailRegex(email)){
+                     mEmail.setError("The Format of the email must be example@example.com");
+                    return;
+                }
+                if(l.CheckName(Name)) return;
+
+                //Info info = new Info(email,PhoneNumber,Name,password,Address,"0","0");
+
                 if(l.EmailRegex(email)) return;
                 if(l.CheckName(Name)) return;
 
-                Info info = new Info(email,PhoneNumber,Name,password,"0","0");
-                databaseReference.push().setValue(info);
 
 
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+//                            Info info = new Info(email,PhoneNumber,Name,password,"0","0");
+//                            databaseReference.push().setValue(info);
+                            Map<String,Object> map = new HashMap<String,Object>();
+                            map.put("email",email);
+                            map.put("PhoneNumber",PhoneNumber);
+                            map.put("FullName",Name);
+                            map.put("password",password);
+                            map.put("address",Address);
+                            map.put("UserID",0);
+                            map.put("flag",0);
+
+                            databaseReference.push().setValue(map);
                             Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                             UserID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentrefernce = fStore.collection("users").document(UserID);
                             Map<String, Object> user = new HashMap<>();
                             user.put("FullName", Name);
+                            user.put("Address",Address);
                             user.put("Email", email);
                             user.put("PhoneNumber", PhoneNumber);
                             user.put("Password", password);
@@ -115,7 +132,7 @@ public class Register extends AppCompatActivity {
                             });
 
                             startActivity(myIntent);
-
+                            finish();
 //                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
                             Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -128,6 +145,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 startActivity(new Intent(getApplicationContext(),Login.class));
+                finish();
+
             }
         });
 

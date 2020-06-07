@@ -1,6 +1,9 @@
 package com.example.b7sport;
 
 
+import java.util.Map;
+
+
 public class Arena {
 
     private int id;
@@ -10,6 +13,7 @@ public class Arena {
     private Double housenumber;
     private String neighbor;
     private String activity;
+    private Map<String,Object> participants;
     private String lighing;
     private String sport_type;
     private double lon;
@@ -29,8 +33,12 @@ public class Arena {
     public void setActivity(String activity) {
         this.activity = activity;
     }
-
-
+/*
+    private String lighing;
+    private String sport_type;
+    private double lon;
+    private double lat;
+*/
 
     public String getName() {
         return name;

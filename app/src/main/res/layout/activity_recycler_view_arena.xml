@@ -5,19 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecyclerViewArena">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="בחר מגרש"
         android:textSize="30dp"
-        android:id="@+id/sel"/>
-
+        android:id="@+id/sel"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_list"
         android:layout_below="@+id/sel"/>
-
 </RelativeLayout>

@@ -17,22 +17,17 @@ public class ExampleUnitTest {
     }
 /*
     @Test
-
     public void blocktest()
     {
          blockuser b=new blockuser();
          boolean result=b.check_database("abdalsk");
          assertEquals("test",true,result);
-
-
-
     }
     */
 
       @Test
     public void test_password()
       {
-
           boolean result=l.PasswordIsEmpty("");
           assertEquals(result,true);
       }
@@ -40,13 +35,10 @@ public class ExampleUnitTest {
       public  void PasswordLength()
       {
           assertEquals(l.PasswordLength("1234456"),false);
-
       }
       @Test
     public  void EmailRequired(){
-
           assertEquals(l.EmailRequired("a@m.com"),false);
-
       }
       @Test
     public void  Emailregx()
@@ -58,15 +50,5 @@ public class ExampleUnitTest {
       {
           assertEquals(l.CheckName("abd"),false);
       }
-        @Test
-    public void CheckGrName()
-    {
-        assertEquals(l.CheckGrName(""),false);
-    }
 
-    public void CheckNumber()
-    {
-        assertEquals(l.CheckNumber(-3),false);
-
-    }
 }

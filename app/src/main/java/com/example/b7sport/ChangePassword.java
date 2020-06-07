@@ -84,4 +84,10 @@ public class ChangePassword extends AppCompatActivity {
         }
         );
     }
+
+    public boolean checknewp(String cnewp)
+    {
+        String newp = "asd123";
+        return newp.equals(cnewp);
+    }
 }

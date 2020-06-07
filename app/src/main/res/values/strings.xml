@@ -1,5 +1,3 @@
 <resources>
-    <string name="search_hint" />
-    <string name="search">search</string>
     <string name="title_activity_arena_maps">Map</string>
 </resources>
