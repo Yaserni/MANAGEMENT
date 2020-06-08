@@ -3,6 +3,10 @@
     <issue id="all">
         <ignore path="src/main/res/layout" />
         <ignore path="src/main/test" />
+        <ignore path="src/main/res/drawable" />
+        <ignore path="src/main/res/drawable-v24" />
+
+
     </issue>
 
 </lint>
