@@ -33,7 +33,7 @@ pipeline {
     stage('Static Code Analysis') {
       steps {
         sh './gradlew :app:lint'
-   //     sh './gradlew checkstyleMain'
+        sh './gradlew checkstyleMain'
       }
     }
     stage('Build APK') {
@@ -50,11 +50,11 @@ post {
                 unstableTotalAll: 120,
                 failedTotalAll: 220
             )
-          //  recordIssues(
-           //     tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle-report.xml'),
-             //   unstableTotalAll: 160,
-               // failedTotalAll: 320
-           // )
+            recordIssues(
+                tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle-report.xml'),
+                unstableTotalAll: 160,
+                failedTotalAll: 320
+            )
             
             echo 'Sending email.'
             
