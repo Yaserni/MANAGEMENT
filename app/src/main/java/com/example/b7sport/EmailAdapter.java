@@ -27,7 +27,6 @@ import java.util.List;
 public class EmailAdapter extends RecyclerView.Adapter<EmailAdapter.ViewHolder> implements Filterable {
 
     Dialog mydialog;
-    public AppCompatActivity z = new AppCompatActivity();
     private Context context;
     private List<String> list;
     private List<String> fulllist;
@@ -40,7 +39,6 @@ public class EmailAdapter extends RecyclerView.Adapter<EmailAdapter.ViewHolder> 
 
     }
 
-    private TextView name,phone;
     @NonNull
     @Override
     public EmailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -128,7 +126,8 @@ public class EmailAdapter extends RecyclerView.Adapter<EmailAdapter.ViewHolder> 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView email,name;
+        public TextView email;
+        public TextView name;
         LinearLayout linear1;
         public Dialog mydDialog;
 
